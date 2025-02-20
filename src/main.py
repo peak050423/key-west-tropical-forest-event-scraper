@@ -26,10 +26,9 @@ headers = {
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36"
 }
 
-response = requests.get(url, headers=headers)
-
 async def main():
     async with Actor:
+        response = requests.get(url, headers=headers)
         if response.status_code == 200:
 
             ld_json_data = []
@@ -63,6 +62,8 @@ async def main():
                                 "image": record.get("image"),
                                 "url": record.get("url")
                             })
+
+            records.sort(key=lambda x: x['date'])
 
             i = 0    
             for record in records:
