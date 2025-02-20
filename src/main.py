@@ -53,16 +53,22 @@ async def main():
 
                     date_obj = datetime.strptime(date, '%Y-%m-%d').date() if date else None
 
+                    if not record.get('location').get('name') and not record.get('location').get('address'):
+                        location = f"{record.get('location').get('name')}, {record.get('location').get('address')}"
+                    else: 
+                        location = ""
+
                     if date and name:
                         if identifier not in unique_identifiers:            
                             records.append({
                                 "date": date,
                                 "name": name,
-                                "location": f"{record.get('location').get('name')}, {record.get('location').get('address')}",
+                                "location": location,
                                 "description": description,
                                 "image": record.get("image"),
                                 "url": record.get("url")
                             })
+
 
             records.sort(key=lambda x: x['date'])
 
