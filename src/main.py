@@ -80,10 +80,10 @@ async def main():
                     start_time = ""
                     end_time = ""
 
-                    time = soup.find_all("abbr", class_="mec-events-abbr")[-1].get_text(strip=True)         
-                    if time:
-                        start_time = time.split(" – ")[0]
-                        end_time = time.split(" – ")[1]
+                    time = soup.find_all("abbr", class_="mec-events-abbr")[-1].get_text(strip=True).split(" – ")         
+                    if len(time) > 0:
+                        start_time = time[0]
+                        end_time = time[1]
                         start_time_object = datetime.strptime(start_time.strip(), '%I:%M %p')
                         start_time_24 = start_time_object.strftime('%H:%M')
                         end_time_object = datetime.strptime(end_time.strip(), '%I:%M %p')
