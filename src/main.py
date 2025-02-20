@@ -105,6 +105,8 @@ async def main():
                         "description": record.get('description'),
                     }
                 )
+
+            results.sort(key=lambda x: x['date'])
             
             for row in results:
                 await Actor.push_data(
