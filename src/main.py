@@ -58,6 +58,7 @@ async def main():
                             records.append({
                                 "date": date,
                                 "name": name,
+                                "location": f"{record.get('location').get('name')}, {record.get('location').get('address')}",
                                 "description": description,
                                 "image": record.get("image"),
                                 "url": record.get("url")
@@ -67,7 +68,6 @@ async def main():
 
             results = []
 
-            i = 0    
             for record in records:
 
                 response = requests.get(record.get("url"), headers=headers)
@@ -80,7 +80,12 @@ async def main():
                     start_time = ""
                     end_time = ""
 
-                    time = soup.find_all("abbr", class_="mec-events-abbr")[-1].get_text(strip=True).split(" – ")         
+                    def contains_am_pm(tag):
+                        return tag.name == "abbr" and ("am" in tag.text or "pm" in tag.text)
+                    
+                    if soup.find(contains_am_pm):
+                        time = soup.find(contains_am_pm).get_text(strip=True).split(" – ")  
+
                     if len(time) > 0:
                         start_time = time[0]
                         end_time = time[1]
