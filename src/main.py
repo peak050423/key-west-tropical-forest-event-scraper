@@ -65,6 +65,8 @@ async def main():
 
             records.sort(key=lambda x: x['date'])
 
+            results = []
+
             i = 0    
             for record in records:
 
@@ -91,7 +93,7 @@ async def main():
                     if soup.find("dd", class_="mec-events-event-cost"):
                         cost = soup.find("dd", class_="mec-events-event-cost").get_text(strip=True)
 
-                await Actor.push_data(
+                results.append(
                     {
                         "date": record.get('date'),
                         "start_time": start_time,
@@ -101,6 +103,20 @@ async def main():
                         "location": record.get('location'),
                         "image": record.get('image'),
                         "description": record.get('description'),
+                    }
+                )
+            
+            for row in results:
+                await Actor.push_data(
+                    {
+                        "date": row.get('date'),
+                        "start_time": row.get('start_time'),
+                        "end_time": row.get("end_time"),
+                        "name": row.get('name'),
+                        "cost": row.get('cost'),
+                        "location": row.get('location'),
+                        "image": row.get('image'),
+                        "description": row.get('description')
                     }
                 )
 
