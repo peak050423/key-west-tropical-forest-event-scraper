@@ -53,7 +53,7 @@ async def main():
 
                     date_obj = datetime.strptime(date, '%Y-%m-%d').date() if date else None
 
-                    if not record.get('location').get('name') and not record.get('location').get('address'):
+                    if record.get('location') and record.get('location').get('name') and record.get('location').get('address'):
                         location = f"{record.get('location').get('name')}, {record.get('location').get('address')}"
                     else: 
                         location = ""
