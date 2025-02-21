@@ -23,10 +23,10 @@
 							"start_time",
 							"end_time",
 							"name",
-							"cost",
+							"description",
 							"location",
-							"image",
-							"description"
+							"cost",
+							"image"
 						]
 					},
 					"display": {
@@ -48,21 +48,21 @@
 								"label": "name",
 								"format": "string"
 							},
-							"cost": {
-								"label": "cost",
+							"description": {
+								"label": "description",
 								"format": "string"
 							},
 							"location": {
 								"label": "location",
 								"format": "string"
 							},
+							"cost": {
+								"label": "cost",
+								"format": "string"
+							},
 							"image": {
 								"label": "image",
 								"format": "image"
-							},
-							"description": {
-								"label": "description",
-								"format": "string"
 							}
 						}
 					}
