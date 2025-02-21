@@ -96,9 +96,9 @@ async def main():
                         start_time = time[0]
                         end_time = time[1]
                         start_time_object = datetime.strptime(start_time.strip(), '%I:%M %p')
-                        start_time_24 = start_time_object.strftime('%H:%M')
+                        start_time_24 = start_time_object.strftime('%H:%M:%S')
                         end_time_object = datetime.strptime(end_time.strip(), '%I:%M %p')
-                        end_time_24 = end_time_object.strftime('%H:%M')
+                        end_time_24 = end_time_object.strftime('%H:%M:%S')
                         start_time = start_time_24
                         end_time = end_time_24
                     if soup.find("dd", class_="mec-events-event-cost"):
